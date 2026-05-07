@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import AddProductModal from '@/components/admin/AddProductModal';
+import EditProductModal from '@/components/admin/EditProductModal';
 import { useEffect } from 'react';
 import api from '@/lib/axios';
 import { Product } from '@/types/product';
 
 export default function ProductManagement() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const fetchProducts = async () => {
   try {
@@ -170,7 +172,10 @@ useEffect(() => {
       <td className="px-6 py-4 text-right">
         <div className="flex justify-end gap-1">
 
-          <button className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors">
+          <button 
+            onClick={() => setEditingProduct(product)}
+            className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors"
+          >
             <span className="material-symbols-outlined block">
               edit
             </span>
@@ -206,6 +211,12 @@ useEffect(() => {
   isOpen={isModalOpen}
   onClose={() => setIsModalOpen(false)}
   fetchProducts={fetchProducts}
+/>
+     <EditProductModal
+  isOpen={!!editingProduct}
+  onClose={() => setEditingProduct(null)}
+  fetchProducts={fetchProducts}
+  product={editingProduct}
 />
     </>
   );

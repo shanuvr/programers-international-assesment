@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | SalesCore Admin Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "inverse-surface": "#2d3133",
+                      "surface-tint": "#565e74",
+                      "on-primary-container": "#7c839b",
+                      "on-secondary-container": "#fefcff",
+                      "on-error": "#ffffff",
+                      "on-background": "#191c1e",
+                      "secondary": "#0058be",
+                      "on-secondary-fixed-variant": "#004395",
+                      "tertiary-fixed": "#d3e4fe",
+                      "tertiary": "#000000",
+                      "surface-bright": "#f7f9fb",
+                      "primary-container": "#131b2e",
+                      "primary": "#000000",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "surface-variant": "#e0e3e5",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "inverse-primary": "#bec6e0",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "on-surface": "#191c1e",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#76777d",
+                      "on-primary-fixed": "#131b2e",
+                      "secondary-container": "#2170e4",
+                      "outline-variant": "#c6c6cd",
+                      "surface-container-highest": "#e0e3e5",
+                      "primary-fixed": "#dae2fd",
+                      "on-tertiary-container": "#75859d",
+                      "tertiary-container": "#0b1c30",
+                      "on-secondary-fixed": "#001a42",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-surface-variant": "#45464d",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "surface-dim": "#d8dadc",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "background": "#f7f9fb",
+                      "surface": "#f7f9fb",
+                      "surface-container": "#eceef0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "0.5rem",
+                      "xl": "2rem",
+                      "base": "4px",
+                      "container-max": "1440px",
+                      "2xl": "3rem",
+                      "md": "1rem",
+                      "xs": "0.25rem",
+                      "sidebar-width": "260px",
+                      "lg": "1.5rem"
+              },
+              "fontFamily": {
+                      "h2": ["Inter"],
+                      "h3": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface min-h-screen flex flex-col">
+<main class="flex-grow flex items-center justify-center p-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 max-w-[1200px] w-full bg-surface-container-lowest rounded-xl shadow-md overflow-hidden border border-outline-variant">
+<!-- Left Side: Visual Content -->
+<div class="hidden lg:block lg:col-span-6 relative">
+<div class="absolute inset-0 bg-primary-container/80 z-10 flex flex-col justify-end p-xl">
+<div class="mb-lg">
+<span class="inline-flex items-center justify-center p-sm bg-secondary rounded-lg text-on-secondary mb-md">
+<span class="material-symbols-outlined text-[32px]">shield_person</span>
+</span>
+<h2 class="font-display text-display text-white mb-sm">Secure Enterprise Access</h2>
+<p class="font-body-md text-body-md text-on-primary-container max-w-[400px]">
+                            Advanced sales intelligence and workspace management for the modern enterprise professional.
+                        </p>
+</div>
+<div class="flex items-center gap-md py-md border-t border-white/10">
+<div class="flex -space-x-2">
+<img alt="Admin user 1" class="h-8 w-8 rounded-full border-2 border-primary-container" data-alt="A professional headshot of a corporate executive in a suit, set against a blurred office background. The lighting is crisp and modern, matching a high-end SaaS corporate aesthetic with soft blue and gray tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwSpzmGnZZyb8b16_19XoyMnY58xwrTZmGObv5kniFRWJP63KuaZU7Hnhdy0BN3BVB8orhvHIi2-1UnR8FAzyympb9_Kpzx-5_UXcwdcS5ddKQ47LT4TLTd-xEjPdkzZ0BxDkZc7IHUxxA0JSqb97uEah8mFf6EukCbBNSxLFEurodkinoZ5F5PR6jgOhdohr-1-YM7VSdmhLRwYx-nDE2jAX4W0l2VbWLrwV6SPDYVccP0B9bznXun6ckyP3BeNyyk6qHvU-8b9I"/>
+<img alt="Admin user 2" class="h-8 w-8 rounded-full border-2 border-primary-container" data-alt="A smiling professional woman in a modern workspace environment, captured with shallow depth of field. The image is bright and clean with a professional color palette of slate and soft whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb4z5N_YseKGVtaGlwvxvYYBQ0XhWQvjInkAaR8fkwMLrBIxqKDhPjcU8AyVlp8PNJiO8XNsrq_KgwUHhup12-s9NV01dnOk9RKwnyk1d61n34ljMZ-87gBwNK36oTSUHqGfvjpkHfI5E8y3j0lQKmeJ8-2fp7yRJ0m1KtWEpVSwPmrJGOwFBUv-cZBZEufu3cvJt_iRNwuN0X2LQamMyHwuJ3IxIWMqy-AiKe5E8apb0rfgknrm0QrKfgV_CR2jYt3d_gMXFvBfg"/>
+<img alt="Admin user 3" class="h-8 w-8 rounded-full border-2 border-primary-container" data-alt="A detailed portrait of a tech professional in a bright minimalist studio. The composition is clean and follows the rule of thirds, with a sophisticated and trustworthy mood suitable for a premium business application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzCl_LWKkJ5PTYMMR-29D3bCHrYz79YA_K93hMJwNPuk8_OK2E_GwipYGX6A4PZnhx6YBCTwpf3HUqZ1WwLu7LIaQrsnIeLdmyfK0u31UytWn6h9yUcGoD6bge8ZiVSNnWLNCWimPQwCXmMfDoqDcMlh19Pnz2QxHRk1S8fx81QoMO1cRZIcPWOnUOQTa-PNX5dvuln-OIS-yWiEKM6s3zoiSnMQSGyHqB6ST2X7moWcaTO_CXJV-xNqBUstJj6fFqiQmVzn7v5lw"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-primary-container">Trusted by 500+ global enterprises</span>
+</div>
+</div>
+<img alt="Corporate skyscraper" class="absolute inset-0 h-full w-full object-cover" data-alt="A low-angle shot of a sleek modern skyscraper made of glass and steel, reaching towards a clear blue sky. The reflections on the glass create a geometric pattern that feels technologically advanced and corporate. The lighting is bright and high-contrast, emphasizing architectural precision and enterprise-level scale." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbP3omIHMV4FfH8r6MUT9beIfSqhUAHWEdo5gYsnDLK03AwGZBVLAAMEfmJ5UJtfwO_e5iPfFZhrgZ7mD0vlXpLdEgNt-sVfQ7h1-TOT9hctkRtJSMEMBUx7nnWrGcDDy6q9jPqcqdF0ScpjoIg0zEgsgQfaUJep4PcvzyJbor4L_WRMiKzHABPMfar9fkS83OlsLtIlzubdT02IZG1-P3pxyzQ69CjhWmoH4zHCApOf-raWcVubJgAARIVDRINJv7jPFI2wrV7cg"/>
+</div>
+<!-- Right Side: Login Form -->
+<div class="lg:col-span-6 p-xl md:p-2xl flex flex-col justify-center">
+<div class="mb-xl">
+<div class="flex items-center gap-xs mb-lg">
+<div class="w-8 h-8 bg-secondary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">trending_up</span>
+</div>
+<span class="font-h2 text-h2 text-primary font-bold tracking-tight">SalesCore</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface mb-xs">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Admin Portal Access</p>
+</div>
+<form class="space-y-lg">
+<!-- Email Input -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-sm" for="email">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-secondary transition-colors">mail</span>
+</div>
+<input class="block w-full pl-xl pr-md py-md bg-surface-bright border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all" id="email" name="email" placeholder="admin@salescore.ai" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div>
+<div class="flex justify-between items-center mb-sm">
+<label class="block font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-secondary hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-secondary transition-colors">lock</span>
+</div>
+<input class="block w-full pl-xl pr-xl py-md bg-surface-bright border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all" id="password" name="password" placeholder="••••••••" type="password"/>
+<div class="absolute inset-y-0 right-0 pr-md flex items-center cursor-pointer text-outline hover:text-on-surface">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary transition-all" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-sm block font-body-sm text-body-sm text-on-surface-variant" for="remember-me">Remember Me</label>
+</div>
+<!-- Sign In Button -->
+<button class="w-full py-md px-lg bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:bg-secondary active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-sm" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+</form>
+<div class="mt-xl pt-lg border-t border-outline-variant flex flex-col gap-md">
+<div class="relative flex items-center justify-center">
+<span class="absolute px-md bg-surface-container-lowest font-label-sm text-label-sm text-outline">OR CONTINUE WITH</span>
+</div>
+<div class="grid grid-cols-2 gap-md mt-sm">
+<button class="flex items-center justify-center gap-sm py-sm border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container-low transition-all">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="font-label-sm text-label-sm text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-sm py-sm border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[20px] text-primary">key</span>
+<span class="font-label-sm text-label-sm text-on-surface">SSO</span>
+</button>
+</div>
+</div>
+<div class="mt-2xl text-center">
+<p class="font-body-sm text-body-sm text-outline-variant">
+                        © 2024 SalesCore AI. All rights reserved. 
+                        <br/>
+<a class="hover:text-secondary transition-colors underline-offset-4 underline" href="#">Privacy Policy</a> • <a class="hover:text-secondary transition-colors underline-offset-4 underline" href="#">Terms of Service</a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default, used for interaction mocking) -->
+<div class="fixed bottom-xl right-xl flex items-center gap-sm p-md bg-primary-container border border-outline-variant rounded-xl shadow-md" id="security-badge">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">End-to-End Encrypted</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">AES-256 Bit Security</p>
+</div>
+</div>
+</body></html>

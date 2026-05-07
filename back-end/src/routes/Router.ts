@@ -1,6 +1,6 @@
 import express from 'express'
 import { upload } from '../config/multer'
-import { addCategory, addEnquiry, addProduct, createAdmin, deleteCategory, deleteProduct, editCategory, editProduct, getAllCategories, getAllProducts, health, loginAdmin } from '../controllers/Controller'
+import { addCategory, addEnquiry, addProduct, createAdmin, deleteCategory, deleteProduct, editCategory, editProduct, getAllCategories, getAllEnquiries, getAllProducts, health, loginAdmin } from '../controllers/Controller'
 const router = express.Router()
 router.get("/health",health)
 router.post("/login", loginAdmin);
@@ -12,6 +12,7 @@ router.put("/category/:id", editCategory);
 router.delete("/category/:id", deleteCategory);
 router.post("/enquiry", addEnquiry);
 router.get("/products", getAllProducts);
+router.get("/enquiries", getAllEnquiries);
 router.get("/categories", getAllCategories);
 router.post("/admin", createAdmin);
 

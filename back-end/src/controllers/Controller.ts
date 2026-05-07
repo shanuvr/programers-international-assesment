@@ -393,3 +393,22 @@ export const createAdmin = async (
     next(error);
   }
 };
+
+export const getAllEnquiries = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const enquiries = await Enquiry.find().populate("productId").sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json({
+      message: "Enquiries fetched successfully",
+      enquiries,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
