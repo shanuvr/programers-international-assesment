@@ -1,10 +1,17 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function SideNavBar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('admin');
+    router.push('/admin/login');
+  };
 
   const navItems = [
     { name: 'Enquiries', path: '/admin/enquiries', icon: 'question_answer' },
@@ -44,13 +51,13 @@ export default function SideNavBar() {
       </nav>
 
       <div className="mt-auto border-t border-outline-variant pt-4">
-        <Link
-          href="/admin/login"
-          className="flex items-center gap-4 px-4 py-2 text-error hover:bg-error-container/20 rounded-lg transition-all font-label-md text-label-md"
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-4 px-4 py-2 text-error hover:bg-error-container/20 rounded-lg transition-all font-label-md text-label-md"
         >
           <span className="material-symbols-outlined">logout</span>
           <span>Logout</span>
-        </Link>
+        </button>
       </div>
     </aside>
   );

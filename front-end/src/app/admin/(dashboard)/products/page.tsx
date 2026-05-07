@@ -25,6 +25,19 @@ useEffect(() => {
   fetchProducts();
 }, []);
 
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete this product?')) {
+      try {
+        await api.delete(`/product/${id}`);
+        alert('Product deleted successfully');
+        fetchProducts();
+      } catch (error) {
+        console.log(error);
+        alert('Failed to delete product');
+      }
+    }
+  };
+
   return (
     <>
       {/* Page Action Header */}
@@ -181,7 +194,10 @@ useEffect(() => {
             </span>
           </button>
 
-          <button className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors">
+          <button 
+            onClick={() => handleDelete(product._id)}
+            className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors"
+          >
             <span className="material-symbols-outlined block">
               delete
             </span>

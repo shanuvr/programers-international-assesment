@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Enquiry } from '@/types/enquiry';
 import api from '@/lib/axios';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 export default function EnquiryManagement() {
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
@@ -19,6 +21,33 @@ export default function EnquiryManagement() {
     fetchEnquiries();
   }, []);
 
+  const handleExportPDF = () => {
+    const doc = new jsPDF();
+    doc.text('SalesCore Enquiries Report', 14, 15);
+    
+    const tableColumn = ["Customer", "Contact", "Product Interest", "Qty", "Demo Requested"];
+    const tableRows: any[] = [];
+
+    enquiries.forEach(enquiry => {
+      const enquiryData = [
+        enquiry.fullName,
+        enquiry.mobile,
+        enquiry.productId?.name || "Unknown Product",
+        enquiry.quantity,
+        enquiry.demoRequest ? "Yes" : "No"
+      ];
+      tableRows.push(enquiryData);
+    });
+
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+    });
+    
+    doc.save(`enquiries_report_${new Date().toISOString().split('T')[0]}.pdf`);
+  };
+
   return (
     <>
       {/* Page Action Header */}
@@ -28,6 +57,7 @@ export default function EnquiryManagement() {
           <p className="font-body-sm text-body-sm text-on-surface-variant">Review and respond to enterprise customer inquiries and demo requests.</p>
         </div>
         <button 
+          onClick={handleExportPDF}
           className="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm hover:opacity-90 active:scale-95 transition-all"
         >
           <span className="material-symbols-outlined text-base">download</span>
