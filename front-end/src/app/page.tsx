@@ -1,9 +1,65 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+"use client";
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import ProductCard from '@/components/ProductCard';
 import Image from 'next/image';
+import { useEffect, useState } from "react";
+import api from '@/lib/axios';
+import { Product } from '@/types/product';
+import { Category } from '@/types/category';
 
 export default function PublicHomePage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  
+
+;
+
+const fetchProducts = async (category = "") => {
+  try {
+    const response = await api.get(
+      `/products?category=${category}`
+    );
+
+    setProducts(response.data.products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+// fetch categories
+const fetchCategories = async () => {
+  try {
+    const response = await api.get("/categories");
+
+    setCategories(response.data.categories);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+// category click
+const handleCategoryFilter = (
+  categoryName: string
+) => {
+  setSelectedCategory(categoryName);
+
+  fetchProducts(categoryName);
+};
+
+
+// initial load
+useEffect(() => {
+  fetchProducts();
+
+  fetchCategories();
+}, []);
+
+  
   return (
     <>
       <Navbar />
@@ -69,22 +125,29 @@ export default function PublicHomePage() {
               <div>
                 <h3 className="text-h3 font-h3 mb-4">Categories</h3>
                 <div className="flex flex-col gap-1">
-                  <label className="flex items-center gap-2 p-2 hover:bg-surface-container-low rounded-lg cursor-pointer group">
-                    <input className="rounded border-outline text-secondary focus:ring-secondary" type="checkbox" />
-                    <span className="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Software Solutions</span>
-                  </label>
-                  <label className="flex items-center gap-2 p-2 bg-secondary-fixed/30 rounded-lg cursor-pointer group border border-secondary-container/20">
-                    <input defaultChecked className="rounded border-outline text-secondary focus:ring-secondary" type="checkbox" />
-                    <span className="text-body-md font-bold text-secondary">Enterprise Hardware</span>
-                  </label>
-                  <label className="flex items-center gap-2 p-2 hover:bg-surface-container-low rounded-lg cursor-pointer group">
-                    <input className="rounded border-outline text-secondary focus:ring-secondary" type="checkbox" />
-                    <span className="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Consulting Services</span>
-                  </label>
-                  <label className="flex items-center gap-2 p-2 hover:bg-surface-container-low rounded-lg cursor-pointer group">
-                    <input className="rounded border-outline text-secondary focus:ring-secondary" type="checkbox" />
-                    <span className="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Cloud Infrastructure</span>
-                  </label>
+                  {categories.map((category) => (
+ <label
+  key={category._id}
+  onClick={() =>
+    handleCategoryFilter(category.name)
+  }
+  className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer group
+  ${
+    selectedCategory === category.name
+      ? "bg-secondary-fixed/30 border border-secondary-container/20"
+      : "hover:bg-surface-container-low"
+  }`}
+>
+    <input
+      className="rounded border-outline text-secondary focus:ring-secondary"
+      type="checkbox"
+    />
+
+    <span className="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">
+      {category.name}
+    </span>
+  </label>
+))}
                 </div>
               </div>
               <div>
@@ -121,30 +184,18 @@ export default function PublicHomePage() {
 
               {/* Bento-style Product Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <ProductCard 
-                  title="Apex Rack S1"
-                  price="$4,299"
-                  description="High-performance enterprise server rack with integrated cooling and AI-driven load balancing capabilities."
-                  category="Hardware"
-                  imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBalPlerVbxhKte-wJ7kbAADigujwlHHDCdN7_ThOw1FYEgCcERH7Efs8AM1Qy_P7ElSVf6wDQKwTlcjrdlhVBiZbKNkVca-V8vlB8ay69zNCL-xS0I4V-FiXY-7wdpXEXQ96cTk-PRA-_s4RhNyM9ru3bdj5PXu1XP3fWeFBPBJv2tt-wo-VZRBIurGZC5y02wtrByyxcKU0jwLjKg5o0ZoywHWlVHh9f-O2ank8CB09gAHKSZ-eoYbFUr_HxFz-pXfkzXk4boJrc"
-                  isSoftware={false}
-                />
-                <ProductCard 
-                  title="CoreNode Pro"
-                  price="$1,850"
-                  description="Edge computing processing unit designed for low-latency industrial automation and real-time analytics."
-                  category="Hardware"
-                  imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nX57xwK--D3Kwf-apt4jaaEyPn5PJCzAKAp5sq44D6M6QHRHh97avr7UEVRYnskZznt9QRYeE8iTmp1sE-3_L8couYYXoX9FrzaIYWcO3IYx6-KYDKOYBf8Fl_QUALg9XBqVwjnEFVOS65mGxLJbTchKHaho9gMM7BU2q0j8aTddrOkZyFlx3EchN3kis10JAq0_PW0WXeC_ZqVIqYwpoQhLQ1Zoww212fBpTBHiiC1LFzf7f-KkkM7KqtA_NGvNK3O-kP8MGTY"
-                  isSoftware={false}
-                />
-                <ProductCard 
-                  title="SyncOS Enterprise"
-                  price="$299/mo"
-                  description="Complete cloud operating system for distributed teams, featuring end-to-end encryption and global sync."
-                  category="Software"
-                  imageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuBWD4oiLKrlQuaMLvLPTnM1SXpNM_knWeY51QGPiIOO9_2Fvl-2BzolFP_nScUDvjR-iYY4-OpbFIiktJo5Ujemd0l_bb87j_93ipV1d_qRFkfl858rQmSf2H8S4rX421ZnO8D4qWs4MHw6VTvvL6Apg1RgrQgeKRQi3LInOvt6QvES4OK3BlFPW1EOnGprnrv_vrLCU_KYWMHE4bllfmXt90naF4yZN9fOIRGMaHkpc8nUoYn0qhsagVxpBUtyvmWeW3F1mKwry5k"
-                  isSoftware={true}
-                />
+                {products.map((product) => (
+  <ProductCard
+    key={product._id}
+    _id={product._id}
+    title={product.name}
+    price={`₹${product.price}`}
+    description={"Product description"}
+    category={product.category}
+    imageUrl={`http://localhost:3002/${product.image}`}
+    isSoftware={false}
+  />
+))}
               </div>
 
               {/* Special Offer Card (Bento Large) */}

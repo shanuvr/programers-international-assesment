@@ -4,6 +4,7 @@ import Image from 'next/image';
 import EnquiryModal from './EnquiryModal';
 
 interface ProductCardProps {
+  _id: string;
   title: string;
   price: string;
   description: string;
@@ -12,7 +13,7 @@ interface ProductCardProps {
   isSoftware?: boolean;
 }
 
-export default function ProductCard({ title, price, description, category, imageUrl, isSoftware }: ProductCardProps) {
+export default function ProductCard({ _id,title, price, description, category, imageUrl, isSoftware }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -50,11 +51,16 @@ export default function ProductCard({ title, price, description, category, image
         </div>
       </div>
       
-      <EnquiryModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        product={{ title, price, imageUrl }} 
-      />
+      <EnquiryModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  product={{
+    _id,
+    title,
+    price,
+    imageUrl,
+  }}
+/>
     </>
   );
 }

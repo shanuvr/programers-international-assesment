@@ -1,10 +1,27 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import AddProductModal from '@/components/admin/AddProductModal';
+import { useEffect } from 'react';
+import api from '@/lib/axios';
+import { Product } from '@/types/product';
 
 export default function ProductManagement() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const fetchProducts = async () => {
+  try {
+    const response = await api.get('/products');
+
+    setProducts(response.data.products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+useEffect(() => {
+  fetchProducts();
+}, []);
 
   return (
     <>
@@ -94,86 +111,82 @@ export default function ProductManagement() {
                 <th className="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-outline-variant">
-              {/* Row 1 */}
-              <tr className="hover:bg-surface-container-low transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant relative">
-                      <Image alt="Workstation" fill className="object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR75q3s1PrVBhnIaMBkkvFobngNKl0Sb4-mPwMW394v0A3GL4NdYHG7wMEpCG6debUVCw9YNUvD8v9-_Et9H-ryS6EBsEaB6fP1lqN3Mdo5-nY9knpbE00f2WglrbS6o5O5X_euGWSW3mi4PH-c0JmWCx4aSnuMzxFXUSj7Z_SqhidBSlBdASXSP4SNvpYy9H0-6cFzpCB8DC4O_J8nR88mODksPE7zk3_VuzT-JkdiTMu_gWJqp1LePIqBUSR8h2TrYoK7t7g2b4" unoptimized />
-                    </div>
-                    <div>
-                      <p className="font-label-md text-label-md text-on-surface">CoreBook Pro X15</p>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">SKU: CB-992-PX</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 font-body-sm text-body-sm">Workstations</td>
-                <td className="px-6 py-4 font-label-md text-label-md font-bold text-on-surface">$2,499.00</td>
-                <td className="px-6 py-4 font-body-sm text-body-sm">142 units</td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[10px] font-bold uppercase">Active</span>
-                </td>
-                <td className="px-6 py-4 text-right">
-                  <div className="flex justify-end gap-1">
-                    <button className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">edit</span></button>
-                    <button className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">delete</span></button>
-                  </div>
-                </td>
-              </tr>
-              {/* Row 2 */}
-              <tr className="hover:bg-surface-container-low transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant relative">
-                      <Image alt="Server" fill className="object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3O_M7gfXDXuh9IPt0krIFS5I9FXFuo9KCgbT2aG7os3fH6KsqfNcCi8bZMfhwHwymmosaYK1TSYc6a0pGOuEZTECduzwbwbpqMIswIzWaEqtZKJKtwd1W2re2pIPiuEqAO9Gd9L1SwWdhqs-i-EM-wb51V4a3OZ-vQ5ov7fTakJg7uqcsT0YnX6avB8161TLC1QghTqwXu7VRuPC8vKzcVGWxz-rjhTk35JsxcQbrhqmxGqtDXXCIN8r6F4-zVD5KJDWL48V68QQ" unoptimized />
-                    </div>
-                    <div>
-                      <p className="font-label-md text-label-md text-on-surface">RackCore Enterprise V2</p>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">SKU: RC-V2-880</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 font-body-sm text-body-sm">Servers</td>
-                <td className="px-6 py-4 font-label-md text-label-md font-bold text-on-surface">$12,850.00</td>
-                <td className="px-6 py-4 font-body-sm text-body-sm text-error font-bold">12 units</td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 bg-error-container text-on-error-container rounded-full text-[10px] font-bold uppercase">Low Stock</span>
-                </td>
-                <td className="px-6 py-4 text-right">
-                  <div className="flex justify-end gap-1">
-                    <button className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">edit</span></button>
-                    <button className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">delete</span></button>
-                  </div>
-                </td>
-              </tr>
-              {/* Row 3 */}
-              <tr className="hover:bg-surface-container-low transition-colors">
-                <td className="px-6 py-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant relative">
-                      <Image alt="Headset" fill className="object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUoC1TSmLYqTo0NmCJ8qyvghJJsNtWpEMZOUX-0yVAWWfj2g-eoBKuoNqdJNEk3Q0kx-yRZ_bUMB5jRx5SV3mcSEW0KU3wsBI1XURQIicKP21gLl1MiyZdo1HQ81StrLflDkRGSUAq9S0K4Nu5NpGiJdAV_BXS8UII6CjRGaR_ghSqE4xh12hTrbdWbPLzczyIERNgvSLmKZABzKQgkDytvQzDE1NaGXfQqYbtD_hB-FGzfyaeySbYeYb-CGrKUlmvuzleVdEmDec" unoptimized />
-                    </div>
-                    <div>
-                      <p className="font-label-md text-label-md text-on-surface">VoiceSync Elite</p>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant">SKU: VS-EL-44</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 font-body-sm text-body-sm">Accessories</td>
-                <td className="px-6 py-4 font-label-md text-label-md font-bold text-on-surface">$299.00</td>
-                <td className="px-6 py-4 font-body-sm text-body-sm">450 units</td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 bg-[#dcfce7] text-[#166534] rounded-full text-[10px] font-bold uppercase">Active</span>
-                </td>
-                <td className="px-6 py-4 text-right">
-                  <div className="flex justify-end gap-1">
-                    <button className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">edit</span></button>
-                    <button className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors"><span className="material-symbols-outlined block">delete</span></button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+           <tbody className="divide-y divide-outline-variant">
+  {products.map((product) => (
+    <tr
+      key={product._id}
+      className="hover:bg-surface-container-low transition-colors"
+    >
+      {/* Product */}
+      <td className="px-6 py-4">
+        <div className="flex items-center gap-4">
+
+          <div className="w-12 h-12 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant relative">
+            <Image
+              alt={product.name}
+              fill
+              className="object-cover"
+              src={`http://localhost:3002/${product.image}`}
+              unoptimized
+            />
+          </div>
+
+          <div>
+            <p className="font-label-md text-label-md text-on-surface">
+              {product.name}
+            </p>
+
+            <p className="font-body-sm text-body-sm text-on-surface-variant">
+              Product ID: {product._id.slice(0, 6)}
+            </p>
+          </div>
+
+        </div>
+      </td>
+
+      {/* Category */}
+      <td className="px-6 py-4 font-body-sm text-body-sm">
+        {product.category}
+      </td>
+
+      {/* Price */}
+      <td className="px-6 py-4 font-label-md text-label-md font-bold text-on-surface">
+        ₹{product.price}
+      </td>
+
+      {/* Stock */}
+      <td className="px-6 py-4 font-body-sm text-body-sm">
+        In Stock
+      </td>
+
+      {/* Status */}
+      <td className="px-6 py-4">
+        <span className="px-2 py-1 bg-[#dcfce7] text-[#166534] rounded-full text-[10px] font-bold uppercase">
+          Active
+        </span>
+      </td>
+
+      {/* Actions */}
+      <td className="px-6 py-4 text-right">
+        <div className="flex justify-end gap-1">
+
+          <button className="p-1 text-on-surface-variant hover:text-secondary rounded-full hover:bg-surface-container transition-colors">
+            <span className="material-symbols-outlined block">
+              edit
+            </span>
+          </button>
+
+          <button className="p-1 text-on-surface-variant hover:text-error rounded-full hover:bg-surface-container transition-colors">
+            <span className="material-symbols-outlined block">
+              delete
+            </span>
+          </button>
+
+        </div>
+      </td>
+    </tr>
+  ))}
+</tbody>
           </table>
         </div>
         
