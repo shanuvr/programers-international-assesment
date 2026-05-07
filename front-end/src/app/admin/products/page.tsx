@@ -202,7 +202,11 @@ useEffect(() => {
         </div>
       </div>
 
-      <AddProductModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+     <AddProductModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  fetchProducts={fetchProducts}
+/>
     </>
   );
 }
