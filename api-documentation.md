@@ -1,4 +1,4 @@
-# SalesCore API Documentation
+# SalesCore API Documentation 
 
 Base URL: `http://localhost:3002` (Backend Server)
 
