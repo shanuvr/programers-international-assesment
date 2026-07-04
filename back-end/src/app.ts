@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import router from './routes/Router';
 import cors from 'cors'
 
-const app = express();
+const app = express(); 
 app.use(
   cors({
     origin: "http://localhost:3000",
