@@ -4,7 +4,7 @@ Base URL: `http://localhost:3002` (Backend Server)
 
 ## Authentication & Admin
 
-### POST `/login`
+### POST `/login` 
 Authenticate an admin user.
 - **Body:** `{ email, password }`
 - **Response:** `{ message, token, admin: { id, email } }`
